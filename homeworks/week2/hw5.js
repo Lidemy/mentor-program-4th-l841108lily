@@ -9,7 +9,7 @@ function join(arr, concatStr) {
 
 function repeat(str, times) {
   var ansStr = ''
-  for(j=1; j<=5; j++){
+  for(j=1; j<=times; j++){
     ansStr += str
   }
   return ansStr
