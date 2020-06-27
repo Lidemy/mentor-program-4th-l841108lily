@@ -1,30 +1,30 @@
-var readline = require('readline');
+const readline = require('readline');
 
-var lines = []
-var rl = readline.createInterface({
-  input: process.stdin
+const lines = [];
+const rl = readline.createInterface({
+  input: process.stdin,
 });
 
-rl.on('line', function (line) {
-  lines.push(line)
+rl.on('line', (line) => {
+  lines.push(line);
 });
 
-rl.on('close', function() {
-  solve(lines)
-})
+rl.on('close', () => {
+  // eslint-disable-next-line
+  solve(lines);
+});
 
-function solve(lines) {
-  var n = lines[0]
-  if(n<1 || n>30){
-    console.log('n is not in the range.')
-  }else{
-    for(let i=1; i<=n; i++){
-      var str = ''
-      for(let j=1; j<=i; j++){
-        str += '*'
+function solve(imput) {
+  const n = imput[0];
+  if (n < 1 || n > 30) {
+    console.log('n is not in the range.');
+  } else {
+    for (let i = 1; i <= n; i += 1) {
+      let str = '';
+      for (let j = 1; j <= i; j += 1) {
+        str += '*';
       }
-      console.log(str)
+      console.log(str);
     }
   }
 }
-

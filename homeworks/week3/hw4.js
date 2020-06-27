@@ -1,37 +1,34 @@
-var readline = require('readline');
+const readline = require('readline');
 
-var lines = []
-var rl = readline.createInterface({
-  input: process.stdin
+const lines = [];
+const rl = readline.createInterface({
+  input: process.stdin,
 });
 
-rl.on('line', function (line) {
-  lines.push(line)
+rl.on('line', (line) => {
+  lines.push(line);
 });
 
-rl.on('close', function() {
-  solve(lines)
-})
+rl.on('close', () => {
+  // eslint-disable-next-line
+  solve(lines);
+});
 
-function solve(lines) {
-
-  var str = lines[0]
-  var n = str.length
-
-  var rts = opposite(str, n)
-  if(rts === str){
-    console.log("True")
-  }else{
-    console.log("False")
+function opposite(str, n) {
+  let S = '';
+  for (let i = n - 1; i >= 0; i -= 1) {
+    S += str[i];
   }
-  
+  return S;
 }
 
-function opposite(str, n){
-    var S = ''
-  for (i=n-1; i>=0; i--){
-
-    S += str[i]
+function solve(imput) {
+  const str = imput[0];
+  const n = str.length;
+  const rts = opposite(str, n);
+  if (rts === str) {
+    console.log('True');
+  } else {
+    console.log('False');
   }
-  return S
 }
