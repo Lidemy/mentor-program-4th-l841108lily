@@ -5,7 +5,7 @@ const request = require('request');
 const API_ENDPOINT = 'https://lidemy-book-store.herokuapp.com';
 
 request.get(
-  API_ENDPOINT`/books?_limit=10`,
+  `${API_ENDPOINT}/books?_limit=10`,
   function (error, response, body) {
     if (error) {
       console.log('失敗，錯誤代碼為：', error);
