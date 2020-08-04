@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <title>新拖延運動</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+  
+  <style type="text/css">
+    .wrapper {
+      margin: 0px auto;
+      max-width: 645px;
+      background: white;
+      box-shadow: 1.8px 2.4px 5px 0px rgba(0, 0, 0, 0.3);
+    }
+
+    .bar {
+      margin: 0px auto;
+      max-width: 645px;
+      height: 8px;
+      border: solid 6px #fad312;
+      background: #fad312;
+    }
+
+    .title {
+      margin: 54px 42px 0px 42px;      
+      font-family: MicrosoftJhengHei;
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    .info {
+      margin: 35px 42px 0px 42px;  
+      font-family: MicrosoftJhengHei;
+      font-size: 14px;
+      line-height: 2em;
+    }
+
+    .note {
+      margin: 22px 42px 0px 42px;
+      font-family: MicrosoftJhengHei;
+      font-size: 16px;
+      color: #e74149;
+    }
+
+    .ques {
+      margin: 50px 42px 20px 42px;
+      display: flex;
+    }
+
+    .ques__name {
+      font-family: MicrosoftJhengHei;
+      font-size: 20px;
+      color: #000000;
+    }
+
+    .ques__note {
+      margin-left: 2px;
+      font-family: MicrosoftJhengHei;
+      font-size: 20px;
+      color: #e74149;
+    }
+
+    .ans {
+      margin: 0px 42px 0px 42px;
+    }
+
+    .ans input {
+      width: 300px;
+    }
+
+    .ans__radio {
+      margin: 0px 42px 0px 42px;
+      line-height: 2em;    
+    }
+
+    .other__com {
+      margin: -10px 42px 20px 42px;
+      font-family: MicrosoftJhengHei;
+      font-size: 14px;
+    }
+
+    input[type="submit"] {
+      margin: 55px 42px 0px 42px;
+      width: 92px;
+      height: 40px;
+      border-radius: 3px;
+      background-color: #fad312;
+      border:0 none;
+    }
+
+    .submit__note {
+      margin: 22px 42px 68px 42px;
+      font-family: MicrosoftJhengHei;
+      font-size: 14px;
+      padding-bottom: 35px;
+    }
+
+    .footer__bar {
+      height: 3px;
+      border: solid 1px #fad312;
+      background: #fad312;
+    }
+
+    .footer__text {
+      padding: 26px 0px;
+      background: #000000;
+      color: #999999;
+      font-family: MicrosoftJhengHei;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media(max-width: 386px) {
+      .ans input {
+        width: 100%;
+      }      
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="bar"></div>
+    <div class="title">
+      新拖延運動報名表單
+    </div>
+    <div class="info">
+      活動日期：2020/12/10 ~ 2020/12/11
+      <br>
+      活動地點：台北市大安區新生南路二段1號
+    </div>
+    <div class="note">
+      * 必填
+    </div>
+    <form action="index.html">
+    <div class="ques">
+      <div class="ques__name">
+        暱稱
+      </div>
+      <div class="ques__note">
+        *
+      </div>
+    </div>       
+    <div class="ans">
+      <input type="text" placeholder="您的回答" name="name">
+    </div>
+
+    <div class="ques">
+      <div class="ques__name">
+        電子郵件
+      </div>
+      <div class="ques__note">
+        *
+      </div>
+    </div>       
+    <div class="ans">
+      <input type="text" placeholder="您的電子郵件" name="email">
+    </div>
+      
+    <div class="ques">
+      <div class="ques__name">
+        手機號碼
+      </div>
+      <div class="ques__note">
+        *
+      </div>
+    </div>       
+    <div class="ans">
+      <input type="text" placeholder="您的手機號碼" name="phone">
+    </div>      
+
+    <div class="ques">
+      <div class="ques__name">
+        報名類型
+      </div>
+      <div class="ques__note">
+        *
+      </div>
+    </div>       
+    <div class="ans__radio">
+      <input type="radio" name="radio" id="radio_1"  />
+      <label for="radio_1">躺在床上用想像力實作</label>
+      <br>
+      <input type="radio" name="radio" id="radio_2"  />
+      <label for="radio_2">趴在地上滑手機找現成的</label>
+    </div>   
+
+    <div class="ques">
+      <div class="ques__name">
+        怎麼知道這個活動的？
+      </div>
+      <div class="ques__note">
+        *
+      </div>
+    </div>       
+    <div class="ans">
+      <input type="text" placeholder="您的回答" name="why">
+    </div>
+
+    <div class="ques">
+      <div class="ques__name">
+        其他
+      </div>
+    </div>
+    <div class="other__com">
+      對活動的一些其他建議
+    </div>   
+    <div class="ans">
+      <input type="text" placeholder="您的回答" name="other">
+    </div>          
+
+    <input type="submit" value="提交">
+    
+    <div class="submit__note">
+      請勿透過表單送出您的密碼。
+    </div>
+    </form>
+  </div>
+
+  <footer>
+    <div class="footer__bar"></div>
+    <div class="footer__text">
+      © 2020 © Copyright. All rights Reserved.      
+    </div>
+
+  </footer>
+
+</body>
+</html>
