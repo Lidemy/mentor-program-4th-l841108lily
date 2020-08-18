@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Todo List</title>
+ 
+  <style>
+    .wrapper {
+      max-width: 860px;
+      margin: 0px auto;
+      text-align: center;
+      background: #f4f1bb;
+    }
+
+    .title {
+      font-size: 84px;
+      color: #ed6a5a;
+      padding: 24px 0px;
+    }
+
+    .add-item input {
+      font-size: 24px;
+      background: #f4f1bb;
+      border: none;
+      outline: none;
+      border-bottom: #ed6a5a 5px solid;
+      width: 700px;
+      color: #398e83;
+    }
+
+    ::placeholder {
+      color: #9BC1BC;
+    }
+
+    .items {
+      padding: 36px 72px;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      color: #398e83;
+      font-size: 24px;
+      line-height: 24px;
+      margin: 24px 0px;
+    }
+
+    .item__content {
+      flex: 1;
+      text-align: left;
+    }
+
+    input[type='checkbox'] {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+
+    .over .item__content {
+      text-decoration: line-through;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="title">
+      Todo List
+    </div>
+    <div class="add-item">
+      <input type="text" placeholder="Add something to do here :)" id="add">
+    </div>
+    <div class="items">
+      <div class="item">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector(".add-item").addEventListener("keypress", function(e) {
+      if (e.code == 'Enter') {
+        const value = document.querySelector("#add").value
+        if(value =="") {return}
+
+        const div = document.createElement("div")
+        div.classList.add("item")
+        div.innerHTML = `
+          <input class="item__ckeck" type="checkbox" >
+          <div class="item__content">${escapeHtml(value)}</div>
+          <button class="delete">刪除</button>`
+        document.querySelector(".items").appendChild(div)
+        document.querySelector("#add").value = ""
+      }
+
+      function escapeHtml(unsafe) {
+        return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+      }
+    })
+
+    document.querySelector(".items").addEventListener("click", function(e) {
+      if (e.target.classList.contains("delete")) {
+        e.target.parentNode.remove()
+        return
+      }
+      if (e.target.classList.contains("item__ckeck")) {
+        e.target.parentNode.classList.toggle("over")
+      }
+
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html >
+<head>
+  <meta charset="utf-8">
+  <title>餐廳常見問題</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+
+  <style>
+    .navbar {
+      box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+    }
+
+    .navbar .wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 84px;
+      background: white;
+      padding: 0px 20px;
+    }
+
+    .navbar__site-name {
+      font-family: Questrial;
+      font-size: 36px;
+      color: #489846;
+    }
+
+    .navbar__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      font-family: MicrosoftJhengHei;
+      font-size: 18px;
+    }
+
+    .navbar__list li {
+      margin-left: 12px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .navbar__list li.active,
+    .navbar__list li:hover {
+      background: #ff7286;
+    }
+
+    .navbar__list li.active a,
+    .navbar__list li:hover a {
+      color: white;
+    }
+
+    .navbar__list li a {
+      text-decoration: none;
+      color: black;
+      padding: 12px 24px;
+      display: block;
+    }
+
+    .wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0px 12px;
+    }
+
+    .banner {
+      height: 450px;
+      background: url(bg.png) center/cover no-repeat;
+      position: relative;
+    }
+
+    .banner:after {
+      content: '';
+      position: absolute;
+      background: rgba(0, 0, 0, 0.3);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .banner h1 {
+      display: inline-block;
+      margin: 0;
+      color: white;
+      font-family: MicrosoftJhengHei;
+      font-size: 60px;
+      font-weight: bold;
+      position: relative;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    .section {
+      text-align: center;
+      margin: 80px auto;
+      width: 810px;
+    }
+
+    .section__title {
+      display: inline-block;
+      font-family: MicrosoftJhengHei;
+      font-size: 36px;
+      font-weight: bold;
+      border-left: solid 15px #a3dea2;
+      padding: 16px;
+      margin-bottom: 36px;
+    }
+
+    .quesAndAns {
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .ques__icon {
+      display: inline-block;
+      color: #70b282;
+      font-family: Questrial;
+      font-size: 24px;
+      padding:28px 15px;
+    }
+
+    .ques__content {
+      display: inline-block;
+      color: #000000;
+      font-family: MicrosoftJhengHei;
+      font-size: 18px;
+    }
+
+    .ans {
+      font-family: MicrosoftJhengHei;
+      font-size: 16px;
+      letter-spacing: 0.14px;
+      text-align: left;
+      color: #000000;
+      padding: 0px 15px 45px 70px;
+      display: none;
+    }
+
+    .ans__open {
+      display: block;
+    }
+
+    .quesAndAns__bar {
+      width: 810px;
+      height: 1px;
+      background-color: #a6e2c0;
+    }
+
+    .footer {
+      margin-top: 48px;
+    }
+
+    .footer__top {
+      background: #e8efee;
+      padding: 32px;
+      color: #484848;
+    }
+
+    .footer__top .wrapper{
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer__info {
+      margin-right: 16px;
+    }
+
+    .footer__info div + div{
+      margin-top: 10px;
+    }
+
+    .footer__site {
+      font-family: Questrial;
+      font-size: 36px;
+      color: #489846;
+    }
+
+    .footer__bottom {
+      background: #35564b;
+      padding: 12px;
+      text-align: center;
+      color: white;
+      font-family: MicrosoftJhengHei;
+      font-size: 16px;
+    }
+
+    @media(max-width: 768px) {
+      .navbar .wrapper {
+        height: 120px;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0px;
+      }
+
+      .navbar__list {
+        display: flex;
+        width: 100%;
+      }
+
+      .navbar__list li {
+        flex: 1;
+        margin-left: 0;
+        border-radius: 0;
+        text-align: center;
+      }
+
+      .navbar__site-name {
+        margin-top: 10px;
+      }
+
+      .footer__info {
+        margin-right: 0;
+        margin-top: 16px;
+      }
+
+      .footer__top .wrapper {
+        flex-direction: column-reverse;
+      }
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <nav>
+    <div class="navbar">
+      <div class="wrapper">
+        <div class="navbar__site-name">
+          Just A Bite!
+        </div>
+
+        <ul class="navbar__list">
+          <li class="active"><a href="#">抽個大獎</a></li>
+          <li><a href="#">我要點餐</a></li>
+          <li><a href="#">查詢訂單</a></li>
+          <li><a href="#">常見問題</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
+  <section class="section">
+    <h2 class="section__title">
+      FAQ - 常見問題
+    </h2>
+    <div class="quesAndAns">
+      <div class="ques__icon">Q1:</div>
+      <div class="ques__content">如何辦理退貨？</div>
+      <div class="ans">第一段文字</div>
+      <div class="quesAndAns__bar"></div>
+    </div>
+
+    <div class="quesAndAns">
+      <div class="ques__icon">Q2:</div>
+      <div class="ques__content">目前提供哪些付款方式？</div>
+      <div class="ans">第二段文字</div>
+      <div class="quesAndAns__bar"></div>
+    </div>
+
+    <div class="quesAndAns">
+      <div class="ques__icon">Q3:</div>
+      <div class="ques__content">線上刷卡如何操作呢？</div>
+      <div class="ans">第三段文字</div>
+      <div class="quesAndAns__bar"></div>
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="footer__top">
+      <div class="wrapper">
+        <div class="footer__info">
+          <div>餐館地址: 天上地下天堂路三分之一里六段520號</div>
+          <div>訂位專線：02-1314-5566</div>
+          <div>營業時間：週一〜週五 09:00~18:00 / 週六、週日、國定假日（含連假）休息</div>
+          <div>email：service@justabite.com.tw</div>
+        </div>
+        <div >
+          <div class="footer__site">Just A Bite!</div>
+          <div>Facebook / Instagram / Youtube</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      Copyright © 2020 Just A Bite All Rights Reserved. 咬一口股份有限公司版權所有
+    </div>
+  </footer>
+
+  <script>
+    const elements = document.querySelector(".section")
+      .addEventListener("click", function(e) {     
+        if (e.target.closest(".quesAndAns")) {
+          const element = e.target.closest(".quesAndAns")
+          const open_element = element.querySelector(".ans")
+          open_element.classList.toggle("ans__open")
+        }
+      })
+  </script>
+</body>
+</html>
