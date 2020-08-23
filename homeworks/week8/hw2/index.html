@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html >
+<head>
+  <meta charset="utf-8">
+  <title>Twitch Top Games</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+
+  <style>
+    .navbar {
+      box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+    }
+
+    .navbar .wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 84px;
+      background: white;
+      padding: 0px 20px;
+    }
+
+    .navbar__site-name {
+      font-family: Questrial;
+      font-size: 36px;
+    }
+
+    .navbar__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      font-family: MicrosoftJhengHei;
+      font-size: 18px;
+    }
+
+    .navbar__list li {
+      margin-left: 12px;
+      border-radius: 8px;
+      transition: background 0.2s;
+      text-decoration: none;
+      color: black;
+      padding: 12px 24px;
+      display: block;
+    }
+
+    .navbar__list li:hover {
+      background: #ff7286;
+      color: white;
+    }
+
+    .wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0px 12px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .streams {
+      display:inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .stream {
+      background: #ff7286;
+      width: 360px;
+      color: white;
+      cursor: pointer;
+      margin-left: 16px;
+      margin-top: 16px;
+    }
+
+    .stream img {
+      width: 360px;
+    }
+
+    .stream__info {
+      height: 64px;
+      display: flex;
+    }
+
+    .info__avatar img {
+      height: 58px;
+      width: 58px;
+      margin-left: 8px;
+      border-radius: 50%;
+    }
+
+    .info__desc {
+      margin-left: 8px;
+      margin-top: 8px;
+    }
+
+    .desc__title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 280px;
+    }
+
+    .desc__channel {
+      margin-top: 8px;
+      font-size: 12px;
+    }
+
+    .stream-empty {
+      width: 360px;
+      margin-left: 16px;
+    }
+
+
+
+    @media(max-width: 768px) {
+      .navbar .wrapper {
+        height: 160px;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0px;
+      }
+
+      .navbar__list {
+        display: flex;
+        width: 100%;
+      }
+
+      .navbar__list li {
+        flex: 1;
+        margin-left: 0;
+        border-radius: 0;
+        text-align: center;
+      }
+
+      .navbar__site-name {
+        margin-top: 10px;
+      }
+
+  </style>
+
+</head>
+
+<body>
+  <nav>
+    <div class="navbar">
+      <div class="wrapper">
+        <div class="navbar__site-name">
+          Twitch Top Games
+        </div>
+        <ul class="navbar__list">
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="wrapper">
+    <h1>Game's name</h1>
+    <h2>Top 20 popular live streams sorted by current viewers</h2>
+    <section class="streams">
+    </section>
+    
+  </div>
+      
+
+
+  <script>
+    var apiUrl = "https://api.twitch.tv/kraken"
+    var template = 
+    `<div class="stream">
+      <img src="$preview" />
+      <div class="stream__info">
+        <div class="info__avatar">
+          <img src="$logo">
+        </div>
+        <div class="info__desc">
+            <div class="desc__title">
+              $title
+            </div>
+            <div class="desc__channel">
+              $channel
+            </div>
+        </div>
+        </div>
+      </div>`
+
+    // 負責接前五個遊戲 api 然後回傳資料
+    function getGames(cb) {
+      var request = new XMLHttpRequest();
+      request.open("GET", apiUrl + "/games/top?limit=5", true);
+      request.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json")
+      request.setRequestHeader("Client-ID", "l6lkkque775589mak7t7iti12r5fxe")
+
+      request.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+          cb(JSON.parse(this.response));
+        }
+      };
+      request.send();
+    }
+
+    // 負責接遊戲中實況的 api 然後回傳資料
+    function getStreams(name, cb) {
+      var request = new XMLHttpRequest();
+      // encodeURIComponent 避免字元產生的錯誤，如：&a=1
+      request.open("GET", apiUrl + "/streams?game=" + encodeURIComponent(name), true);
+      request.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json")
+      request.setRequestHeader("Client-ID", "l6lkkque775589mak7t7iti12r5fxe")
+
+      request.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+          cb(JSON.parse(this.response));
+        }
+      };
+      request.send();
+    }
+
+    // 呼叫 getGames 拿到資料之後，動態產生 li
+    getGames(function(games) {
+      var topGames = games.top.map((game) => game.game.name)
+      for(let game of topGames) {
+        let element = document.createElement("li")
+        element.innerHTML = game
+        document.querySelector(".navbar__list").appendChild(element)
+      }
+      // 要先拿第一個遊戲的實況
+      getStreams(topGames[0], function(data) {
+        appendStreams(data.streams)
+        addPlaceholder()
+        addPlaceholder()
+      })
+    })
+
+    // 當點了不同的遊戲名稱，清空目前的 stream，拿取新的遊戲的 stream
+    document.querySelector(".navbar__list").addEventListener("click", function(e)  {
+      if (e.target.tagName.toLowerCase() === "li") {
+        var text = e.target.innerText;
+        document.querySelector("h1").innerText = text
+        document.querySelector(".streams").innerHTML = "";
+        // 拿以 text 為名稱的 stream
+        getStreams(text, function(data){
+          appendStreams(data.streams)
+          addPlaceholder()
+          addPlaceholder()
+        })
+      }
+    })
+
+    // 為了排版加入空的 stream
+    function addPlaceholder() {
+      const placeholder = document.createElement("div")
+      placeholder.classList.add("stream-empty")
+      document.querySelector(".streams").appendChild(placeholder)
+    }
+
+    // 代入 stream 的值到網頁中，動態產生 stream 資訊
+    function appendStreams(streams) {
+      streams.forEach(function(stream) {
+        let element = document.createElement("div")
+        let content = template
+          // 替換成正確的值
+          .replace("$preview", stream.preview.large)
+          .replace("$logo", stream.channel.logo)
+          .replace("$title", stream.channel.status)
+          .replace("$channel", stream.channel.name)
+        document.querySelector(".streams").appendChild(element)
+        element.outerHTML = content
+      });
+    }
+  </script>
+</body>
+</html>
